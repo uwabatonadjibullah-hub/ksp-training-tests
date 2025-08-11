@@ -1,3 +1,6 @@
+- name: Build project
+  run: npm run build
+
 name: Firebase Deploy
 
 on:
