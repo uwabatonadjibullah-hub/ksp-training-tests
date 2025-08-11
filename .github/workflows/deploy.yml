@@ -1,12 +1,9 @@
-- name: Build project
-  run: npm run build
-
 name: Firebase Deploy
 
 on:
   push:
     branches:
-      - master
+      - master  # or 'main' if that's your branch
 
 jobs:
   deploy:
@@ -16,10 +13,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Firebase CLI
-        run: npm install -g firebase-tools
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
 
       - name: Deploy to Firebase Hosting
-        run: firebase deploy --only hosting
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          channelId: live
