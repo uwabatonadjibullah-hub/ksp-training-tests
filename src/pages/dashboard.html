@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Dashboard</title>
+</head>
+<body>
+  <h1>Performance Dashboard</h1>
+  <div id="dashboard"></div>
+
+  <script>
+    const traineeName = localStorage.getItem("studentName");
+    const history = JSON.parse(localStorage.getItem("traineeHistory")) || [];
+
+    const dashboard = document.getElementById("dashboard");
+    const userHistory = history.filter(entry => entry.name === traineeName);
+
+    if (userHistory.length === 0) {
+      dashboard.innerHTML = "<p>No quiz attempts yet.</p>";
+    } else {
+      let totalPercent = 0;
+      userHistory.forEach((entry, index) => {
+        totalPercent += entry.percentage;
+        dashboard.innerHTML += `
+          <div>
+            <h3>Attempt ${index + 1} (${entry.date})</h3>
+            <p>Score: ${entry.score}/${entry.total}</p>
+            <p>Percentage: ${entry.percentage}%</p>
+            <hr>
+          </div>`;
+      });
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+      const role = userSnap.data().role;
+      if (role !== "admin") {
+        alert("Access denied.");
+        window.location.href = "adminlogin.html";
+      }
+    } else {
+      window.location.href = "adminlogin.html";
+    }
+  } else {
+    window.location.href = "adminlogin.html";
+  }
+});
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+      const role = userSnap.data().role;
+      if (role !== "admin") {
+        alert("Access denied.");
+        window.location.href = "adminlogin.html";
+      }
+    } else {
+      window.location.href = "adminlogin.html";
+    }
+  } else {
+    window.location.href = "adminlogin.html";
+  }
+});
+      const average = Math.round(totalPercent / userHistory.length);
+      dashboard.innerHTML += `<h2>Average Performance: ${average}%</h2>`;
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KSP Rwanda Admin Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <img src="logo.png" alt="KSP Logo" class="logo" />
+      <h2>KSP Admin</h2>
+      <nav>
+        <ul>
+          <li><a href="#">Trainee Data</a></li>
+          <li><a href="#">Quiz Settings</a></li>
+          <li><a href="#">Analytics</a></li>
+          <li><a href="#">Export</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-panel">
+      <header>
+        <h1>Welcome, IAM</h1>
+        <p class="quote">“Every frame tells a story—train to capture it.”</p>
+      </header>
+
+      <section id="content">
+        <!-- Dynamic content will load here -->
+        <p>Select a section from the sidebar to begin.</p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+import { db } from '../firebaseConfig';
+import { collection, getDocs } from 'firebase/firestore';
+
+export const getQuizAnalytics = async () => {
+  const traineesSnap = await getDocs(collection(db, 'trainees'));
+  const results = [];
+
+  for (const doc of traineesSnap.docs) {
+    const traineeId = doc.id;
+    const quizzesSnap = await getDocs(collection(db, `traineeResponses/${traineeId}/quizzes`));
+    let totalScore = 0;
+    let count = 0;
+
+    quizzesSnap.forEach(q => {
+      totalScore += q.data().score || 0;
+      count++;
+    });
+
+    results.push({
+      name: doc.data().name,
+      avgScore: count ? (totalScore / count).toFixed(1) : 0,
+    });
+  }
+
+  return results;
+};

@@ -1,0 +1,178 @@
+/* 🌐 Global Styles */
+:root {
+  --primary: #0d1b2a;      /* Dark Blue */
+  --accent: #ffd700;       /* Gold */
+  --background: #ffffff;   /* White */
+  --text: #000000;         /* Black */
+  --hover: #1b263b;        /* Slightly lighter dark blue */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* 🔗 Links & Buttons */
+a {
+  text-decoration: none;
+  color: var(--primary);
+}
+
+button {
+  background-color: var(--primary);
+  color: var(--background);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--hover);
+}
+
+/* 🧱 Container Layouts */
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background: var(--background);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(13, 27, 42, 0.1);
+}
+
+/* 📝 Form Styles */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input, select, textarea {
+  padding: 10px;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #f5f5f5;
+}
+
+label {
+  font-weight: bold;
+  color: var(--primary);
+}
+
+/* ✅ Auth Pages */
+.auth-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auth-header h2 {
+  color: var(--primary);
+}
+
+.auth-form {
+  background-color: var(--background);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+/* 📊 Dashboard Styles */
+.dashboard {
+  display: grid;
+  gap: 20px;
+}
+
+.card {
+  background-color: var(--accent);
+  color: var(--text);
+  padding: 20px;
+  border-left: 6px solid var(--primary);
+  border-radius: 6px;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+/* 🧑‍💼 Admin Dashboard */
+.admin-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-panel .section {
+  background-color: var(--background);
+  padding: 20px;
+  border-radius: 6px;
+  border-left: 4px solid var(--accent);
+}
+
+/* 🧠 Create Quiz */
+.quiz-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.quiz-form .question-block {
+  background-color: #f1f1f1;
+  padding: 15px;
+  border-radius: 6px;
+  border-left: 4px solid var(--primary);
+}
+
+/* 🧪 Take Quiz */
+.quiz-display {
+  background-color: var(--background);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.quiz-display h2 {
+  margin-bottom: 15px;
+  color: var(--primary);
+}
+
+.quiz-display .question {
+  margin-bottom: 20px;
+}
+
+.quiz-display .options label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* 🎯 Feedback Styles */
+.feedback {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f0f8ff;
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  color: var(--primary);
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  button {
+    width: 100%;
+  }
+}

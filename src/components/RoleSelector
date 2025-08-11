@@ -1,0 +1,17 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const RoleSelector = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="role-selector">
+      <h2>Welcome to KSP Rwanda 🎥</h2>
+      <p>Choose your role to continue:</p>
+      <button onClick={() => navigate('/login?role=trainee')}>🎓 Trainee</button>
+      <button onClick={() => navigate('/login?role=admin')}>🛠️ Admin</button>
+    </div>
+  );
+};
+
+export default RoleSelector;

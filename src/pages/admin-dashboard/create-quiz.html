@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Quiz | KSP Rwanda</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script type="module" src="create-quiz.js"></script>
+</head>
+<body>
+  <div class="quiz-builder">
+    <header>
+      <h1>Create New Quiz</h1>
+      <p class="quote">“Craft questions that shape confidence.”</p>
+      <a href="admin-dashboard.html" class="btn">← Back to Dashboard</a>
+    </header>
+
+    <form id="quizForm">
+      <input type="text" id="quizTitle" placeholder="Quiz Title" required />
+      <div id="questionsContainer"></div>
+      <button type="button" onclick="addQuestion()">➕ Add Question</button>
+      <button type="submit">💾 Save Quiz</button>
+    </form>
+  </div>
+</body>
+</html>

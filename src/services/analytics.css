@@ -1,0 +1,26 @@
+.analytics-container {
+  padding: 2rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+.analytics-container h2 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.export-button {
+  background-color: #ffd700; /* Gold */
+  color: #0d1b2a;            /* Dark Blue */
+  font-weight: bold;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.export-button:hover {
+  background-color: #e6c200;
+}
+

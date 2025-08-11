@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KSP Rwanda Admin Login</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="login-container">
+    <img src="logo.png" alt="KSP Rwanda Logo" class="logo" />
+    <h1>Admin Login</h1>
+    <p class="tagline">Empowering Excellence in Camera Operation</p>
+
+    <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Admin Email" required />
+      <input type="password" id="loginPassword" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+
+    <p id="errorMsg" style="color: red;"></p>
+  </div>
+
+  <!-- Firebase Core -->
+  <script type="module" src="firebase.js"></script>
+
+  <!-- Firebase Auth Logic -->
+  <script type="module">
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+
+    const auth = getAuth();
+
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Optional: Check if user is admin here
+          alert("Login successful! 🚀");
+          window.location.href = "quiz.html"; // Redirect to your quiz/dashboard page
+        })
+        .catch((error) => {
+          document.getElementById("errorMsg").textContent = "Login failed: " + error.message;
+        });
+    });
+  </script>
+</body>
+</html>

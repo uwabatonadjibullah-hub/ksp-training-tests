@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KSP Rwanda Signup</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="signup-container">
+    <img src="logo.png" alt="KSP Rwanda Logo" class="logo" />
+    <h1>Create Your Account</h1>
+    <p class="tagline">Join the journey to camera mastery 🎥</p>
+
+    <form id="signupForm">
+      <input type="email" id="signupEmail" placeholder="Your Email" required />
+      <input type="password" id="signupPassword" placeholder="Create Password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <p id="signupMsg" style="color: red;"></p>
+  </div>
+
+  <!-- Firebase Core -->
+  <script type="module" src="firebase.js"></script>
+
+  <!-- Signup Logic -->
+  <script type="module">
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+
+    const auth = getAuth();
+
+    document.getElementById("signupForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = document.getElementById("signupEmail").value;
+      const password = document.getElementById("signupPassword").value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          document.getElementById("signupMsg").style.color = "green";
+          document.getElementById("signupMsg").textContent = "Signup successful! Redirecting... 🚀";
+          setTimeout(() => {
+            window.location.href = "quiz.html"; // Redirect to quiz or dashboard
+          }, 1500);
+        })
+        .catch((error) => {
+          document.getElementById("signupMsg").textContent = "Signup failed: " + error.message;
+        });
+    });
+  </script>
+</body>
+</html>

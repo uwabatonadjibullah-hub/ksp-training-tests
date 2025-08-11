@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Results</title>
+  <script defer src="questions.js"></script>
+</head>
+<body>
+  <h1>Your Results</h1>
+  <div id="results-container"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("results-container");
+      const userAnswers = JSON.parse(localStorage.getItem("userAnswers")) || [];
+      let score = 0;
+
+      questions.forEach((q, index) => {
+        const userAnswer = userAnswers[index];
+        const correctIndex = q.correctAnswer;
+        const isCorrect = userAnswer === correctIndex;
+        if (isCorrect) score++;
+
+        const result = document.createElement("div");
+        result.innerHTML = `
+          <p><strong>Q${index + 1}:</strong> ${q.question}</p>
+          <p>Your answer: ${q.options[userAnswer] || "No answer"}</p>
+          <p>Correct answer: ${q.options[correctIndex]}</p>
+          <p style="color:${isCorrect ? 'green' : 'red'};">${isCorrect ? 'Correct!' : 'Incorrect'}</p>
+          <hr>`;
+        container.appendChild(result);
+      });
+
+      const finalScore = document.createElement("h2");
+      finalScore.textContent = `You scored ${score} out of ${questions.length}`;
+      container.prepend(finalScore);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KSP Rwanda Admin Dashboard</title>
+    <!-- Tailwind CSS CDN for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex h-screen overflow-hidden">
+
+    <!-- Custom Modal for Messages -->
+    <div id="message-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="bg-gray-800 bg-opacity-75 absolute inset-0"></div>
+            <div class="bg-white rounded-xl shadow-lg p-6 m-4 max-w-sm w-full z-10 text-center transform transition-all scale-100 opacity-100">
+                <p id="message-text" class="text-gray-800 text-lg font-semibold mb-4"></p>
+                <button id="close-modal-btn" class="bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Container -->
+    <div class="flex-1 flex flex-col md:flex-row">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar w-64 bg-white text-gray-800 p-6 flex flex-col md:h-screen shadow-lg rounded-r-2xl">
+            <div class="flex items-center space-x-4 mb-8">
+                <!-- Placeholder for logo. You can replace this with a real image. -->
+                <img src="https://placehold.co/60x60/d1d5db/374151?text=KSP" alt="KSP Logo" class="h-14 w-14 rounded-full" />
+                <h2 class="text-2xl font-bold">KSP Admin</h2>
+            </div>
+            <nav class="flex-1">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" onclick="loadSection('trainees')" class="block py-3 px-4 rounded-lg font-medium text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                            Trainee Data
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="loadSection('quizzes')" class="block py-3 px-4 rounded-lg font-medium text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                            Quiz Settings
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="loadSection('analytics')" class="block py-3 px-4 rounded-lg font-medium text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                            Analytics
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="loadSection('export')" class="block py-3 px-4 rounded-lg font-medium text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                            Export
+                        </a>
+                    </li>
+                    </li>
+                    <a href="create-quiz.html" class="btn">
+                      Create New Quiz
+                    </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="mt-auto">
+                <a href="#" onclick="logout()" class="block py-3 px-4 rounded-lg text-white bg-indigo-600 font-medium text-center hover:bg-indigo-700 transition-colors duration-200">
+                  <li><a href="#" onclick="logout()">Logout</a></li> 
+                  Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Panel -->
+        <main class="main-panel flex-1 p-8 md:p-12 overflow-y-auto">
+            <header class="mb-10">
+                <h1 class="text-4xl font-extrabold text-gray-900">Welcome, Admin</h1>
+                <p class="text-xl text-gray-600 mt-2 italic">“Train with insight. Lead with impact.”</p>
+            </header>
+
+            <section id="content" class="bg-white p-8 rounded-2xl shadow-xl">
+                <p class="text-gray-600 text-lg">Select a section from the sidebar to begin.</p>
+            </section>
+        </main>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        // Firebase Core and Firestore/Auth SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+        import { getFirestore, collection, getDocs, onSnapshot, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+
+        // IMPORTANT: Replace this with your actual Firebase project configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyAXSr8PdRmmINMkr0hvLQAwywo5Ngh9K7E",
+          authDomain: "ksp-camera-training.firebaseapp.com",
+          projectId: "ksp-camera-training",
+          storageBucket: "ksp-camera-training.firebasestorage.app",
+          messagingSenderId: "226833594490",
+          appId: "1:226833594490:web:c9171c6d1bf699bfa423c3",
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // --- Custom Message Modal Logic ---
+        const messageModal = document.getElementById('message-modal');
+        const messageText = document.getElementById('message-text');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+
+        function showMessage(text, callback) {
+            messageText.textContent = text;
+            messageModal.classList.remove('hidden');
+            closeModalBtn.onclick = () => {
+                messageModal.classList.add('hidden');
+                if (callback) {
+                    callback();
+                }
+            };
+        }
+        window.logout = function () {
+  signOut(auth).then(() => {
+    alert("Logged out successfully.");
+    window.location.href = "adminlogin.html";
+  });
+};
+
+        // --- Authentication State Listener ---
+        // This listener runs once when the page loads and whenever the user's auth state changes.
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                // User is not logged in, redirect to login page.
+                window.location.href = "adminlogin.html";
+                return;
+            }
+
+            try {
+                // Check if the user is an admin by fetching their role from Firestore.
+                const userRef = doc(db, "users", user.uid);
+                const userSnap = await getDoc(userRef);
+
+                if (!userSnap.exists() || userSnap.data().role !== "admin") {
+                    // Access is denied if the user document doesn't exist or their role is not "admin".
+                    showMessage("Access denied. You are not an admin.", () => {
+                        signOut(auth);
+                        window.location.href = "adminlogin.html";
+                    });
+                    return;
+                }
+
+                // If the user is a verified admin, log a success message.
+                console.log("Admin user logged in:", user.email);
+
+                // This function is for testing the Firestore connection.
+                // It is good practice to remove or comment this out in production.
+                // await testFirestore();
+
+            } catch (error) {
+                console.error("Authentication or Firestore check failed:", error);
+                showMessage("An error occurred during login. Please try again.", () => {
+                    signOut(auth);
+                    window.location.href = "adminlogin.html";
+                });
+            }
+        });
+
+        // --- Logout Function ---
+        window.logout = function () {
+            signOut(auth).then(() => {
+                showMessage("Logged out successfully.", () => {
+                    window.location.href = "adminlogin.html";
+                });
+            }).catch((error) => {
+                console.error("Logout error:", error);
+                showMessage("Failed to log out. Please try again.");
+            });
+        };
+
+        // --- Section Loader Function ---
+        window.loadSection = function (section) {
+            const content = document.getElementById("content");
+            switch (section) {
+                case "trainees":
+                    content.innerHTML = `
+                        <h2 class="text-3xl font-bold mb-6">Trainee Data</h2>
+                        <div class="mb-4">
+                            <input type="text" id="searchInput" placeholder="Search by name or email..." class="p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white rounded-xl shadow-md">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="py-3 px-6 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Profile</th>
+                                        <th class="py-3 px-6 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                        <th class="py-3 px-6 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                        <th class="py-3 px-6 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Progress</th>
+                                        <th class="py-3 px-6 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="traineeTableBody" class="divide-y divide-gray-200"></tbody>
+                            </table>
+                        </div>
+                    `;
+                    loadTrainees();
+                    break;
+                case "quizzes":
+                    content.innerHTML = `
+                        <h2 class="text-3xl font-bold mb-6">Quiz Settings</h2>
+                        <div class="p-6 bg-gray-50 rounded-xl">
+                            <p class="text-gray-600">This section is coming soon. You can add the functionality to create, edit, and delete quizzes here.</p>
+                            <button class="mt-4 bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors">
+                                Add New Quiz
+                            </button>
+                        </div>
+                    `;
+                    break;
+                case "analytics":
+                    content.innerHTML = `
+                        <h2 class="text-3xl font-bold mb-6">Analytics</h2>
+                        <div class="p-6 bg-gray-50 rounded-xl">
+                            <p class="text-gray-600">This section is coming soon. Here you could display charts and graphs about trainee performance and progress.</p>
+                        </div>
+                    `;
+                    break;
+                case "export":
+                    content.innerHTML = `
+                        <h2 class="text-3xl font-bold mb-6">Export</h2>
+                        <div class="p-6 bg-gray-50 rounded-xl">
+                            <p class="text-gray-600">This section is coming soon. You can implement functionality to export trainee data to a CSV or other file format.</p>
+                            <button class="mt-4 bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors">
+                                Export Data
+                            </button>
+                        </div>
+                    `;
+                    break;
+                default:
+                    content.innerHTML = `<p class="text-gray-600 text-lg">Select a section from the sidebar to begin.</p>`;
+            }
+        };
+
+        let allTrainees = [];
+
+        // --- Trainee Data Logic ---
+        function loadTrainees() {
+            const traineeTableBody = document.getElementById("traineeTableBody");
+            const searchInput = document.getElementById("searchInput");
+
+            // Use onSnapshot for real-time data updates from Firestore
+            onSnapshot(collection(db, "trainees"), (snapshot) => {
+                allTrainees = snapshot.docs.map(doc => doc.data());
+                renderTraineeTable(allTrainees);
+            });
+
+            // Add a debounce to the search input to prevent excessive function calls
+            let debounceTimer;
+            searchInput.addEventListener("input", () => {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    const query = searchInput.value.toLowerCase();
+                    const filtered = allTrainees.filter(t =>
+                        t.name.toLowerCase().includes(query) || t.email.toLowerCase().includes(query)
+                    );
+                    renderTraineeTable(filtered);
+                }, 300); // 300ms delay
+            });
+        }
+
+        function renderTraineeTable(data) {
+            const tbody = document.getElementById("traineeTableBody");
+            tbody.innerHTML = "";
+            data.forEach(t => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-100 transition-colors">
+                        <td class="py-4 px-6 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <img src="${t.profileUrl || 'https://placehold.co/40x40/e2e8f0/64748b?text=P'}" class="h-10 w-10 rounded-full" alt="Profile Picture" />
+                            </div>
+                        </td>
+                        <td class="py-4 px-6 whitespace-nowrap">
+                            <div class="text-sm font-medium text-gray-900">${t.name}</div>
+                        </td>
+                        <td class="py-4 px-6 whitespace-nowrap">
+                            <div class="text-sm text-gray-500">${t.email}</div>
+                        </td>
+                        <td class="py-4 px-6 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="w-24 bg-gray-200 rounded-full h-2.5 mr-2">
+                                    <div class="bg-indigo-600 h-2.5 rounded-full" style="width: ${t.progress || 0}%"></div>
+                                </div>
+                                <span class="text-sm font-medium text-gray-500">${t.progress || 0}%</span>
+                            </div>
+                        </td>
+                        <td class="py-4 px-6 whitespace-nowrap text-sm text-gray-500">${t.score || '-'}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // --- Firestore Test Function ---
+        async function testFirestore() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "trainees"));
+                console.log("Firestore connected ✅");
+                querySnapshot.forEach((doc) => {
+                    console.log(doc.id, "=>", doc.data());
+                });
+            } catch (error) {
+                console.error("Firestore test failed ❌", error);
+            }
+        }
+    </script>
+</body>
+</html>

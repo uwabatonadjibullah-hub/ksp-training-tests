@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>KSP Camera Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <img src="logo.png" alt="NAD Production Logo" width="150">
+  <h1>Welcome to the KSP Camera Operation Quiz</h1>
+  <form id="registrationForm">
+    <label for="name">Full Name:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="faculty">Faculty:</label><br>
+    <select id="faculty" name="faculty" required>
+      <option value="">Select Faculty</option>
+      <option value="Filmmaking and Video Production">Filmmaking and Video Production</option>
+      <option value="Multimedia Production">Multimedia Production</option>
+    </select><br><br>
+
+    <button type="submit">Start Quiz</button>
+  </form>
+  <script>
+  document.getElementById("registrationForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const faculty = document.getElementById("faculty").value;
+
+    // Save to localStorage
+    localStorage.setItem("traineeName", name);
+    localStorage.setItem("traineeFaculty", faculty);
+
+    // Redirect to quiz page
+    window.location.href = "quiz.html";
+  });
+</script>
+</body>
+</html>
