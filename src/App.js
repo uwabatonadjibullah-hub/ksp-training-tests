@@ -11,7 +11,6 @@ import Dashboard from './pages/dashboard.jsx';
 import AdminDashboard from './pages/admin-dashboard/admin-dashboard.js';
 import CreateQuiz from './pages/admin-dashboard/create-quiz.js';
 import UseTraineeData from './pages/admin-dashboard/useTraineeData.js';
-import Home from './pages/Home';
 
 import './App.css';
 
