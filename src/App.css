@@ -41,3 +41,14 @@
   padding: 40px;
   border-top: 2px solid #00bcd4;
 }
+
+.auth-buttons {
+  margin-top: 30px;
+}
+
+.auth-buttons button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}

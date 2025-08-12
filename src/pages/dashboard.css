@@ -1,0 +1,97 @@
+/* src/pages/TraineeDashboard.css */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+}
+
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 240px;
+  background-color: #1e293b;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 100px;
+  margin-bottom: 10px;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.sidebar nav ul li {
+  margin: 15px 0;
+}
+
+.sidebar nav ul li a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav ul li a:hover {
+  color: #38bdf8;
+}
+
+.main-panel {
+  flex: 1;
+  padding: 40px;
+  background-color: #ffffff;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.quote {
+  font-style: italic;
+  color: #64748b;
+  margin-bottom: 30px;
+}
+
+#content {
+  background-color: #f9fafb;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.attempt {
+  margin-bottom: 20px;
+}
+
+.attempt h3 {
+  margin-bottom: 5px;
+  color: #0f172a;
+}
+
+.attempt p {
+  margin: 4px 0;
+}
+
+h2 {
+  margin-top: 30px;
+  color: #2563eb;
+}
