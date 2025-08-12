@@ -1,11 +1,18 @@
-import logo from './logo.svg';
+import logo1 from './logo.png';         // Main logo
+import logo2 from './ksp-logo.jpg';     // Alternate logo
 import './App.css';
 
+const useLogo = true; // Toggle this to switch logos
+
 function App() {
+  const logo = useLogo ? logo1 : logo2;
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <h1>Welcome to KSP Camera Training 📸</h1>
+      <p>This platform will guide you through every step of your camera journey.</p>
+      <header className="App-header filmmaking-video"> {/* Updated class name */}
+        <img src={logo} className="App-logo" alt="KSP Logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>

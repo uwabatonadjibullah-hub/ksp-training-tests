@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+.filmmaking-video {
+  background-color: #1a1a1a;
+  padding: 40px;
+  border-top: 2px solid #00bcd4;
+}
