@@ -1,6 +1,6 @@
 import logo1 from 'logo.png';         // Main logo
 import logo2 from 'ksp-logo.jpg';     // Alternate logo
-import 'App.css';
+import './App.css';
 
 const useLogo = true; // Toggle this to switch logos
 
