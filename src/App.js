@@ -4,7 +4,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Login from './pages/login.jsx';
-import Signup from './pages/signup.js';
+import Signup from './pages/signup.jsx';
 import TakeQuiz from './pages/take-quiz.jsx';
 import Results from './pages/results.js';
 import Dashboard from './pages/dashboard.jsx';
@@ -12,6 +12,8 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import AdminDashboard from './pages/admin-dashboard/admin-dashboard.js';
 import CreateQuiz from './pages/admin-dashboard/create-quiz.js';
 import UseTraineeData from './pages/admin-dashboard/useTraineeData.js';
+import Welcome from './pages/welcome.jsx';
+
 
 import './App.css';
 
@@ -48,6 +50,7 @@ function App() {
             </div>
           }
         />
+        <Route path="/" element={<Welcome />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/take-quiz" element={<TakeQuiz />} />
