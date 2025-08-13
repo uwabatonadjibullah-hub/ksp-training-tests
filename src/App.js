@@ -8,6 +8,7 @@ import Signup from './pages/signup.js';
 import TakeQuiz from './pages/take-quiz.jsx';
 import Results from './pages/results.js';
 import Dashboard from './pages/dashboard.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 import AdminDashboard from './pages/admin-dashboard/admin-dashboard.js';
 import CreateQuiz from './pages/admin-dashboard/create-quiz.js';
 import UseTraineeData from './pages/admin-dashboard/useTraineeData.js';
@@ -52,6 +53,7 @@ function App() {
         <Route path="/take-quiz" element={<TakeQuiz />} />
         <Route path="/results" element={<Results />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/create-quiz" element={<CreateQuiz />} />
         <Route path="/trainee-data" element={<UseTraineeData />} />

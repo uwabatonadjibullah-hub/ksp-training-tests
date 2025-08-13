@@ -27,7 +27,7 @@ function Login() {
 
         if (role === 'admin') {
           alert('Welcome Admin! 🚀');
-          navigate('admin-dashboard');
+          navigate('/admin-dashboard');
         } else if (role === 'trainee') {
           alert('Welcome Trainee! 🎥');
           navigate('/dashboard');
