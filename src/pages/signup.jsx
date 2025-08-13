@@ -1,10 +1,10 @@
-// src/pages/Signup.js
+// src/pages/Signup.jsx
 import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../firebase';
-import './Signup.css'; // Optional styling
+import './Signup.css';
 
 function Signup() {
   const [email, setEmail] = useState('');
@@ -16,6 +16,18 @@ function Signup() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+
+    // Basic input validation
+    if (!email.includes('@')) {
+      setErrorMsg('Please enter a valid email address.');
+      return;
+    }
+
+    if (password.length < 6) {
+      setErrorMsg('Password must be at least 6 characters.');
+      return;
+    }
+
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
