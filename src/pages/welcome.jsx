@@ -1,7 +1,7 @@
 // src/pages/Welcome.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Welcome.css';
+import './welcome.css';
 
 function Welcome() {
   const navigate = useNavigate();
