@@ -4,7 +4,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { db } from './firebase'; // Make sure this is correctly configured
-import './Login.css';
+import './login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
