@@ -1,7 +1,7 @@
 // useTraineeData.js
 import { useEffect, useState } from 'react';
 import { getDocs, collection } from 'firebase/firestore';
-import { db } from './firebaseConfig';
+import { db } from 'firebaseConfig';
 
 export function useTraineeData() {
   const [trainees, setTrainees] = useState([]);
