@@ -16,7 +16,7 @@ import AdminDashboard from './pages/Admin-dashboard.js';
 import Results from './pages/results.js';
 import Charts from './pages/Charts.jsx';
 import ModuleManager from './pages/ModuleManager.js';
-import PerformanceCharts from './pages/PerformanceCharts.jsx';
+import PerformanceCharts from './components/PerformanceCharts.js';
 
 // Trainee Pages
 import TraineeHome from './pages/TraineeHome.jsx';
