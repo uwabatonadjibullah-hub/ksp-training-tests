@@ -5,11 +5,10 @@ import logo1 from './logo.png';
 import logo2 from './ksp-logo.jpg';
 
 // Auth & Core Pages
+import Welcome from './pages/welcome.jsx';
 import Login from './pages/login.jsx';
 import Signup from './pages/signup.jsx';
 import TakeQuiz from './pages/take-quiz.jsx';
-import Dashboard from './pages/dashboard.jsx';
-import Welcome from './pages/welcome.jsx';
 
 // Admin Pages
 import AdminHome from './pages/admin-home.js';
@@ -74,7 +73,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/take-quiz" element={<ProtectedRoute><TakeQuiz /></ProtectedRoute>} />
-        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
 
         {/* Admin Pages */}
         <Route path="/admin-home" element={<ProtectedRoute><AdminHome /></ProtectedRoute>} />
