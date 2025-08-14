@@ -2,7 +2,7 @@ import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import TraineeTable from "../components/TraineeTable";
 import PerformanceCharts from "../components/PerformanceCharts";
-import ModuleManager from "../components/ModuleManager";
+import ModuleManager from "../pages/ModuleManager";
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "../firebase";
 import AdminNav from '../components/Adminnav';
