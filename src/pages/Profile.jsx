@@ -3,7 +3,7 @@ import { getAuth } from 'firebase/auth';
 import { doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from './firebase';
 import { useNavigate } from 'react-router-dom';
-import './profile.css';
+import 'profile.css';
 
 export default function Profile() {
   const [name, setName] = useState('');
