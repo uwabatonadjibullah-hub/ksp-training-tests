@@ -1,0 +1,49 @@
+.upcoming-container {
+  padding: 2rem;
+  background: #f9f9f9;
+}
+
+.quiz-list {
+  list-style: none;
+  padding: 0;
+}
+
+.quiz-card {
+  background: white;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.quiz-card h3 {
+  margin: 0 0 0.5rem;
+}
+
+.status-icon {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+.status-icon.green {
+  color: green;
+}
+
+.status-icon.yellow {
+  color: goldenrod;
+}
+
+.status-icon.red {
+  color: crimson;
+}
+
+.quiz-card button {
+  margin-top: 0.5rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}

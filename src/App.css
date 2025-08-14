@@ -52,3 +52,110 @@
   font-size: 16px;
   cursor: pointer;
 }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f4f7fa;
+  margin: 0;
+  color: #333;
+}
+
+h1, h2 {
+  color: #2c3e50;
+  margin-bottom: 0.5em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+}
+
+th, td {
+  padding: 0.75em;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.sidebar {
+  width: 220px;
+  background: #2c3e50;
+  color: white;
+  padding: 1em;
+  height: 100vh;
+  position: fixed;
+}
+
+.sidebar button {
+  background: none;
+  border: none;
+  color: white;
+  margin: 1em 0;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.dashboard-content {
+  margin-left: 240px;
+  padding: 2em;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-nav a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.admin-nav a:hover {
+  text-decoration: underline;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.results-table th,
+.results-table td {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.results-table th {
+  background-color: #f0f4ff;
+  font-weight: bold;
+}
+
+.results-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.export-btn {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.export-btn:hover {
+  background-color: #0056b3;
+}

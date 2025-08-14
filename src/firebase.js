@@ -4,6 +4,7 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { getAnalytics } from 'firebase/analytics';
+import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAXSr8PdRmmINMkr0hvLQAwywo5Ngh9K7E",
@@ -16,6 +17,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
+// Core services
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const analytics = getAnalytics(app);
+export const storage = getStorage(app); // 🔥 Added for handouts & images
