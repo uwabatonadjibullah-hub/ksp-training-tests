@@ -10,7 +10,7 @@
  */
 
 // index.ts
-import { HydratedRouter, RouterProvider } from "react-router/dom";
+import { HydratedRouter, RouterProvider } from "react-router-dom";
 export * from "react-router";
 export {
   HydratedRouter,
