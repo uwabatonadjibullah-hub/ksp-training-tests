@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
-import 'UpcomingQuizzes'; // optional styling
 
 function UpcomingQuizzes() {
   const [quizzes, setQuizzes] = useState([]);
