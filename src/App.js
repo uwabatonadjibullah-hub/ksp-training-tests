@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from './react-router-dom';
 
 import logo1 from './logo.png';
 import logo2 from './ksp-logo.jpg';
